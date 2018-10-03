@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block styles %}
+    {{ super() }}
+{%- endblock %}
+{% block title %}Update Pics{% endblock %}
+{% block body %}
+    {% block nav %}
+        {{ super() }}
+    {%- endblock %}
+    {% block content %}
+        <div class="container">
+            <div id="gallery" class="row">
+            </div>
+            <div id="gallery_controls" class="row form-group">
+                <button class="btn btn-primary" id="set_pic">Set as Profile</button>
+                <button class="btn btn-primary" id="delete_pic">Delete</button>
+            </div>
+            <div>
+                {{ error_message }}
+            </div>
+        </div>
+    {%- endblock %}
+    {%- block footer %}
+        {{ super() }}
+    {%- endblock %}
+    {% block scripts %}
+        {{ super() }}
+        <script src="/static/js/gallery.js"></script>
+    {%- endblock %}
+{%- endblock %}

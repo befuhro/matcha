@@ -1,0 +1,104 @@
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="/static/css/matcha.css" type="text/css">
+{%- endblock %}
+
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+{% block title %}Matcha{% endblock %}
+
+{% block body %}
+    {% block nav %}
+        {% if session['log'] %}
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Matcha</a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            {% if session['log'] | is_admin() %}
+                                <li><a href="/reports">Reports</a></li>
+                                <li><a href="/populate">Populate</a></li>
+                                <li><a href="/reset">Reset</a></li>
+                            {% else %}
+                                <li><a href="/matches">Matches</a></li>
+                                <li><a href="/chat">Chat</a></li>
+                                <li><a href="/search">Search</a></li>
+                            {% endif %}
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a class="notif"><span class='glyphicon glyphicon-bell'></span></a>
+                            </li>
+                            <li><a href="/profile" id="profile_name"><span class="glyphicon glyphicon-user"></span></a>
+                            </li>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        {% else %}
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Matcha</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/register">Register</a></li>
+                            <li><a href="/login">Login</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        {% endif %}
+    {%- endblock %}
+
+    {% block content %}
+    {%- endblock %}
+
+    {% block footer %}
+        <footer class="footer text-center">&copy; 2018 Befuhro & O-reo.</footer>
+    {%- endblock %}
+
+    {% block scripts %}
+        {{ super() }}
+        <script type="text/javascript">
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        </script>
+        <script>
+            {% if session['log'] is defined and session['log'] != "" %}
+                $('#profile_name').append(" <span class='text-capitalize'>" + JSON.parse({{ session['log']|tojson }})['login'] + "</span>");
+            {% endif %}
+        </script>
+        <script src="/static/js/connected.js"></script>
+    {%- endblock %}
+
+{%- endblock %}

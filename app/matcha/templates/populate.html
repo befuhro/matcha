@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block styles %}
+    {{ super() }}
+{%- endblock %}
+{% block title %}Populate Database{% endblock %}
+{% block body %}
+    {% block nav %}
+        {{ super() }}
+    {%- endblock %}
+    {% block content %}
+        <div class="container-fluid text-center">
+            <h2>Populate</h2>
+            <div class="form-group text-center">
+                <div class="alert alert-info" role="alert">This will add 550 random users. Please be patient, it will
+                    take a couple of minutes
+                </div>
+                <button class="btn btn-lg btn-primary" style="margin:auto;" id="populate_btn">Populate</button>
+            </div>
+            <div class="loader hide"></div>
+        </div>
+        <div class="search_list"></div>
+    {%- endblock %}
+    {%- block footer %}
+        {{ super() }}
+    {%- endblock %}
+    {% block scripts %}
+        {{ super() }}
+        <script src="/static/js/populator.js"></script>
+    {%- endblock %}
+{%- endblock %}

@@ -1,0 +1,9 @@
+flask
+redis
+flask-bootstrap
+Flask-SocketIO
+python-dotenv
+python-socketio
+eventlet
+ip2geotools
+numpy

@@ -1,0 +1,218 @@
+{% extends "layout.html" %}
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{%- endblock %}
+{% block title %}Matcha Profile update{% endblock %}
+{% block body %}
+    {% block nav %}
+        {{ super() }}
+    {%- endblock %}
+    {% block content %}
+        <div class='container'>
+            <h2 class="title-form">Profile update</h2>
+            <div id="alert_box" class="alert alert-warning fade in hide">
+                <span id="alert_message"></span>
+            </div>
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse0">Profile information</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapse0" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Login</div>
+                                    <input type="text" id="login" placeholder="Login" class="form-control"
+                                           value="{{ info.get('login') }}">
+                                    <div class="input-group-btn">
+                                        <button id="login_update" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">First name</div>
+                                    <input type="text" id="firstname" placeholder="First name" class="form-control"
+                                           value="{{ info.get('firstname') }}">
+                                    <div class="input-group-btn">
+                                        <button id="firstname_update" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Last name</div>
+                                    <input type="text" id="lastname" placeholder="Last name" class="form-control"
+                                           value="{{ info.get('lastname') }}">
+                                    <div class="input-group-btn">
+                                        <button id="lastname_update" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Email</div>
+                                    <input type="email" id="email" placeholder="Email" class="form-control"
+                                           value="{{ info.get('email') }}">
+                                    <div class="input-group-btn">
+                                        <button id="email_update" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Birthdate</div>
+                                    <input type="date" id="birthdate" class="form-control"
+                                            {% if info.get('birthdate') == null %}
+                                           value="{{ info.get('birthdate') }}"
+                                            {% endif %}
+                                    >
+                                    <div class="input-group-btn">
+                                        <button id="birthdate_update" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Gender</div>
+                                    <select title="gender" id="gender"
+                                            class="selectpicker form-control">
+                                        <option value="male"
+                                                {% if info.get('gender') == 'male' %}selected{% endif %}>
+                                            Male
+                                        </option>
+                                        <option value="female"
+                                                {% if info.get('gender') == 'female' %}selected{% endif %}>
+                                            Female
+                                        </option>
+                                        <option value="other"
+                                                {% if info.get('gender') == 'other' %}selected{% endif %}>
+                                            Other
+                                        </option>
+                                    </select>
+                                    <div class="input-group-btn">
+                                        <button id="gender_update" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Interested in...</div>
+                                    <select title="orientation" id="orientation"
+                                            class="selectpicker form-control">
+                                        <option value="male"
+                                                {% if info.get('orientation') == 'male' %}selected{% endif %}>
+                                            Male
+                                        </option>
+                                        <option value="female"
+                                                {% if info.get('orientation') == 'female' %}selected{% endif %}>
+                                            Female
+                                        </option>
+                                        <option value="both"
+                                                {% if info.get('orientation') == 'both' %}selected{% endif %}>
+                                            Both
+                                        </option>
+                                        <option value="other"
+                                                {% if info.get('orientation') == 'other' %}selected{% endif %}>
+                                            Other
+                                        </option>
+                                    </select>
+                                    <div class="input-group-btn">
+                                        <button id="orientation_update" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Location</div>
+                                    <input type="text" name="location" id="location" placeholder="..."
+                                           class="form-control" value="{{ info.get('city') }}" disabled>
+                                    <div class="input-group-btn">
+                                        <button onclick="getLocation()" id="location_update" class="btn btn-primary">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Interests in life</div>
+                                    <input name="new_hashtag" id="new_hashtag" class="form-control" placeholder="...">
+                                    <div class="input-group-btn">
+                                        <button id="add_button" class="btn btn-primary">Add</button>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <div id="hashtags"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1">Bio</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div>
+                                <div class="form-group">
+                                        <textarea id="bio" class="form-control" title="bio"
+                                                  style="height:80px;">{{ info.get('bio') }}</textarea>
+                                </div>
+                                <button id="bio_update" class="btn btn-primary">Update</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse2">Password</a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input type="password" id="oldpassword" placeholder="Old password"
+                                       class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password" placeholder="New password"
+                                       class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="repeatpassword" placeholder="Repeat new password"
+                                       class="form-control">
+                            </div>
+                            <button id="password_update" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {%- endblock %}
+    {%- block footer %}
+        {{ super() }}
+    {%- endblock %}
+    {% block scripts %}
+        {{ super() }}
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="static/js/hashtags.js"></script>
+        <script src="static/js/geolocation.js"></script>
+        <script src="static/js/update.js"></script>
+        <script src="static/js/notifs.js"></script>
+        <script>
+            get_hashtags();
+            new_hashtag();
+        </script>
+    {%- endblock %}
+{%- endblock %}

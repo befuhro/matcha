@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block styles %}
+    {{ super() }}
+{%- endblock %}
+{% block title %}Matcha login{% endblock %}
+{% block body %}
+    {% block nav %}
+        {{ super() }}
+    {%- endblock %}
+    {% block content %}
+        <div class='container'>
+            {% if session['log'] %}
+                <p>You're logged in already!</p>
+            {% else %}
+                <h2>Login</h2>
+                <form action="/login/validation" method="POST">
+                    <div class="form-group">
+                        <label>Login</label>
+                        <input type="login" name="login" placeholder="login" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="Password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Log in" class="btn btn-default form-control" id="login_btn">
+                        <a href="/forgot_password" id="forgot_pass">Forgot your password?</a>
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+    {%- endblock %}
+    {%- block footer %}
+        {{ super() }}
+    {%- endblock %}
+    {% block scripts %}
+        {{ super() }}
+    {%- endblock %}
+{%- endblock %}

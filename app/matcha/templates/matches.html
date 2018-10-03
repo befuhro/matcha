@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+{% block styles %}
+    {{ super() }}
+{%- endblock %}
+{% block title %}Your Matches{% endblock %}
+{% block body %}
+    {% block nav %}
+        {{ super() }}
+    {%- endblock %}
+    {% block content %}
+        <div class="container match_container">
+            <div class="row">
+                <div class="col-xs-6 col-md-3 match_category">
+                    <button class="btn btn-lg btn-primary" id="btn-1">You matched</button>
+                </div>
+
+                <div class="col-xs-6 col-md-3 match_category">
+                    <button class="btn btn-lg btn-primary" id="btn-2">They liked you</button>
+                </div>
+
+                <div class="col-xs-6 col-md-3 match_category">
+                    <button class="btn btn-lg btn-primary" id="btn-3">You liked them</button>
+                </div>
+
+                <div class="col-xs-6 col-md-3 match_category">
+                    <button class="btn btn-lg btn-primary" id="btn-4">They saw your profile</button>
+                </div>
+            </div>
+            {% if matches | length == 0 %}
+                <div class="match_subtitle" id="sub-1">Nobody, yet...</div>
+            {% endif %}
+            {% if likes | length == 0 %}
+                <div class="match_subtitle hide" id="sub-2">Nobody, yet...</div>
+            {% endif %}
+            {% if my_likes | length == 0 %}
+                <div class="match_subtitle hide" id="sub-3">Nobody, yet...</div>
+            {% endif %}
+            {% if visits | length == 0 %}
+                <div class="match_subtitle hide" id="sub-3">Nobody, yet...</div>
+            {% endif %}
+            <div class="match_list" id="list-1">
+                {% for match in matches %}
+                    <div class="match_item col-xs-12 col-md-6 col-lg-3">
+                        <div class="match_img">
+                            <a href="/profile/{{ match[3] }}"><img src="{{ match[5] }}"/></a>
+                        </div>
+                        <div>
+                            <p class="text-capitalize match_name" id="m-usr_{{ match[2] }}">{{ match[3] }}</p>
+                        </div>
+                        {% if match[6] != 0 %}
+                            <div>
+                                <span class="match_last_connection">Connected {{ match[6] | ctime }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="match_list hide" id="list-2">
+                {% for like in likes %}
+                    <div class="match_item col-xs-12 col-md-6 col-lg-3">
+                        <div class="match_img">
+                            <a href="/profile/{{ like[3] }}"><img src="{{ like[5] }}"/></a>
+                        </div>
+                        <div>
+                            <p class="text-capitalize match_name" id="m-usr_{{ like[2] }}">{{ like[3] }}</p>
+                        </div>
+                        {% if like[6] != 0 %}
+                            <div>
+                                <span class="match_last_connection">Connected {{ like[6] | ctime }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="match_list hide" id="list-3">
+                {% for my_like in my_likes %}
+                    <div class="match_item col-xs-12 col-md-6 col-lg-3">
+                        <div class="match_img">
+                            <a href="/profile/{{ my_like[3] }}"><img src="{{ my_like[5] }}"/></a>
+                        </div>
+                        <div>
+                            <p class="text-capitalize match_name" id="m-usr_{{ my_like[2] }}">{{ my_like[3] }}</p>
+                        </div>
+                        {% if my_like[6] != 0 %}
+                            <div>
+                                <span class="match_last_connection">Connected {{ my_like[6] | ctime }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="match_list hide" id="list-4">
+                {% for visit in visits %}
+                    <div class="match_item col-xs-12 col-md-6 col-lg-3">
+                        <div class="match_img">
+                            <a href="/profile/{{ visit[2] }}"><img src="{{ visit[4] }}"/></a>
+                        </div>
+                        <div>
+                            <p class="text-capitalize match_name" id="m-usr_{{ visit[1] }}">{{ visit[2] }}</p>
+                        </div>
+                        {% if visit[5] != 0 %}
+                            <div>
+                                <span class="match_last_connection">Connected {{ visit[5] | ctime }}</span>
+                            </div>
+                        {% endif %}
+                        <div>
+                            <span class="match_last_connection">Visited {{ visit[6] | ctime }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {%- endblock %}
+    {%- block footer %}
+        {{ super() }}
+    {%- endblock %}
+    {% block scripts %}
+        {{ super() }}
+        <script src="static/js/notifs.js"></script>
+        <script src="static/js/matches.js"></script>
+    {%- endblock %}
+{%- endblock %}

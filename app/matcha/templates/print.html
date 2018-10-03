@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block styles %}
+    {{ super() }}
+{%- endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    {% block nav %}
+        {{ super() }}
+    {%- endblock %}
+    {% block content %}
+        <div class="modal fade" tabindex="-1" role="dialog" id="print_modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{ title }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        {% for message in values %}
+                            <span>{{ message }}</span>
+                            <br/>
+                        {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" href="javascript:history.back()">Go back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {%- endblock %}
+    {%- block footer %}
+        {{ super() }}
+    {%- endblock %}
+    {% block scripts %}
+        {{ super() }}
+        <script>$('#print_modal').modal()</script>
+    {%- endblock %}
+{%- endblock %}

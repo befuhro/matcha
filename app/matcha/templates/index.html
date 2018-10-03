@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block styles %}
+    {{ super() }}
+{%- endblock %}
+{% block body %}
+    {% block nav %}
+        {{ super() }}
+    {%- endblock %}
+    {% block content %}
+        <div class="container">
+            <div class="landing jumbotron">
+                <h1>Matcha</h1>
+                <h2>Find your soul mate, for a day...</h2>
+                <p class="lead"></p>
+                <p><a class="btn btn-lg btn-primary" href="{{ url_for('register', filename='favicon.ico') }}"
+                      role="button">Sign up here</a>
+                </p>
+            </div>
+        </div>
+    {%- endblock %}
+    {% block footer %}
+        {{ super() }}
+    {%- endblock %}
+    {% block scripts %}
+        {{ super() }}
+        {% if session['log'] is defined and session['log'] != "" %}
+            <script src="static/js/notifs.js"></script>
+        {% endif %}
+    {%- endblock %}
+{%- endblock %}

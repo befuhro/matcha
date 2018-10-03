@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block styles %}
+    {{ super() }}
+{%- endblock %}
+{% block title %}Matcha login{% endblock %}
+{% block body %}
+    {% block nav %}
+        {{ super() }}
+    {%- endblock %}
+    {% block content %}
+        <div class='container'>
+            <h2>Reports</h2>
+            {% if reports | length == 0 %}
+                <div class="alert alert-info">No report has been recorded yet</div>
+            {% endif %}
+            {% for report in reports %}
+                <div class="row">
+                    <div class="col-sm-9">
+                        <span><a
+                                href="/profile/{{ report[2] }}">{{ report[2]|capitalize() }}</a> got reported {{ report[0] }} times</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <button class="delete_profile btn btn-danger" id="{{ report[1] }}">Delete this profile</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {%- endblock %}
+    {%- block footer %}
+        {{ super() }}
+    {%- endblock %}
+    {% block scripts %}
+        {{ super() }}
+        <script src="/static/js/reports.js"></script>
+    {%- endblock %}
+{%- endblock %}
