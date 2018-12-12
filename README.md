@@ -1,6 +1,6 @@
 # Matcha
 
-## Objectifs
+## Description
 L'objectif principale de ce projet est d'apprendre à mettre en place un site avec une gestion des données utilisateur complète en créant un site de rencontre  
 Pour utiliser ce site, l'utilisateur devra s'enregistrer et remplir un formulaire comprenant de nombreux champs  
 En fonction des données de l'utilisateur enregistré, un certains nombres de profils lui seront proposés  
