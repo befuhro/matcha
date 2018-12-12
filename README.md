@@ -3,9 +3,9 @@
 ## Objectifs
 L'objectif principale de ce projet est d'apprendre à mettre en place un site avec une gestion des données utilisateur complète en créant un site de rencontre  
 Pour utiliser ce site, l'utilisateur devra s'enregistrer et remplir un formulaire comprenant de nombreux champs  
-En fonction des données de l'utilisateur enregistrées, un certains nombres de profils lui seront proposés  
-Il pourra alors rechercher d'autres utilisateur via de nombreux critères comme la localisation, l'âge, les centres d'intêrets etc..  
-Il pourra aussi liker, matcher et discuter avec d'autres utilisateur  
+En fonction des données de l'utilisateur enregistré, un certains nombres de profils lui seront proposés  
+Il pourra alors rechercher d'autres utilisateurs via de nombreux critères comme la localisation, l'âge, les centres d'intêrets etc...  
+Il pourra aussi liker, matcher et discuter avec d'autres utilisateurs  
 Pour plus d'informations le sujet est disponible en pdf sur le repo  
 
 ## Déploiement
@@ -16,7 +16,7 @@ docker-compose up
 ```
 
 ## Utilisation
-Une fois le deploiement effectue, vous pourrez acceder au site en localhost sur le port 5000  
+Une fois le deploiement effectue, vous pourrez accéder au site en localhost sur le port 5000  
 
 ## Notions abordées  
 * Gestion complète d'un espace utilisateur
